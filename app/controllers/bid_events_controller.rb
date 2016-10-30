@@ -28,7 +28,7 @@ class BidEventsController < ApplicationController
 
     respond_to do |format|
       if @bid_event.save
-        format.html { redirect_to @bid_event, notice: 'Bid event was successfully created.' }
+        format.html { redirect_to :back }
         format.json { render :show, status: :created, location: @bid_event }
       else
         format.html { render :new }
@@ -69,6 +69,6 @@ class BidEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bid_event_params
-      params.require(:bid_event).permit(:auctionable_id, :participant_id, :final)
+      params.require(:bid_event).permit(:auctionable_id, :participant_id, :final, :amount)
     end
 end

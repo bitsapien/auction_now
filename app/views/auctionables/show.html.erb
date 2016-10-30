@@ -1,24 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <h1><%= image_tag(@auctionable.image_url, {height: 70}) %> <%= @auctionable.name %></h1>
+  <div class="row">
+    <div class="col-sm-6" style="background-color:yellow;">
 
 <p>
-  <strong>Name:</strong>
-  <%= @auctionable.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
   <%= @auctionable.description %>
 </p>
 
-<p>
-  <strong>Image url:</strong>
-  <%= @auctionable.image_url %>
-</p>
+    </div>
+    <div class="col-sm-6" style="background-color:pink;">
+      <%= @bid_amount %>
 
-<p>
-  <strong>Base price:</strong>
-  <%= @auctionable.base_price %>
-</p>
+      <!-- all bids -->
+      <% @auctionable.bid_events.each do |bid_event| %>
+        <li> <%= bid_event.participant.name %> bid <%= bid_event.amount %> </li>
+        <% end %>
+      <!-- form -->
 
-<%= link_to 'Edit', edit_auctionable_path(@auctionable) %> |
-<%= link_to 'Back', auctionables_path %>
+<%= bootstrap_form_for(@bid_event) do |f| %>
+    <%= f.hidden_field :auctionable_id, value: @auctionable.id %>
+    <%= f.hidden_field :final, value: false %>
+  <div class="field">
+    <%= f.select :participant_id, Participant.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.number_field :amount, value:  @bid_amount + 5 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Bid' %>
+  </div>
+<% end %>
+
+    </div>
+  </div>
+</div>
+
+
+
