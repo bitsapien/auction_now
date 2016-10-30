@@ -1,0 +1,1 @@
+json.partial! "bid_events/bid_event", bid_event: @bid_event

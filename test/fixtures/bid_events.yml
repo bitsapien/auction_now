@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  auctionable: one
+  participant: one
+  final: false
+
+two:
+  auctionable: two
+  participant: two
+  final: false

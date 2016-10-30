@@ -1,0 +1,1 @@
+json.array! @auctionables, partial: 'auctionables/auctionable', as: :auctionable

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Auctionable:</strong>
+  <%= @bid_event.auctionable %>
+</p>
+
+<p>
+  <strong>Participant:</strong>
+  <%= @bid_event.participant %>
+</p>
+
+<p>
+  <strong>Final:</strong>
+  <%= @bid_event.final %>
+</p>
+
+<%= link_to 'Edit', edit_bid_event_path(@bid_event) %> |
+<%= link_to 'Back', bid_events_path %>

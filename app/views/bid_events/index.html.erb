@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bid Events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Auctionable</th>
+      <th>Participant</th>
+      <th>Final</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bid_events.each do |bid_event| %>
+      <tr>
+        <td><%= bid_event.auctionable %></td>
+        <td><%= bid_event.participant %></td>
+        <td><%= bid_event.final %></td>
+        <td><%= link_to 'Show', bid_event %></td>
+        <td><%= link_to 'Edit', edit_bid_event_path(bid_event) %></td>
+        <td><%= link_to 'Destroy', bid_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bid Event', new_bid_event_path %>
