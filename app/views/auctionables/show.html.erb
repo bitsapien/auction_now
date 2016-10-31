@@ -15,42 +15,42 @@
 </p>
 </div>
 <% else %>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <div class="card card-1" style="padding: 12px;">
       Current Bid for <span class="highlight"><%= @auctionable.name %></span><br/>
 
       <div style="padding: 10px; margin:25px; font-size: 12em; color: #444"><%= @bid_amount %></div>
+      Highest Bidder - <span class="highlight"><%= @auctionable.bid_events.last.try(:participant).try(:name) %></span>
     </div>
   </div>
-   <div class="col-sm-6"> 
-    <div class="card card-3" style="padding: 12px;">
-      
+   <div class="col-sm-8"> 
+    <div style="padding: 12px;">
 
-      <!-- all bids -->
-      <% @auctionable.bid_events.each do |bid_event| %>
-        <li> <%= bid_event.participant.name %> bid <%= bid_event.amount %> </li>
-        <% end %>
       <!-- form -->
 <% if open %>
-<%= bootstrap_form_for(@bid_event) do |f| %>
+<%= bootstrap_form_for(@bid_event, layout: :inline) do |f| %>
     <%= f.hidden_field :auctionable_id, value: @auctionable.id %>
     <%= f.hidden_field :final, value: false %>
-  <div class="field">
-    <%= f.select :participant_id, Participant.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
-  </div>
+    <%= f.select :participant_id, Participant.all.collect { |p| [ p.name, p.id ] }, include_blank: "Select a participant", hide_label: true%>
+    <%= f.number_field :amount, value:  @bid_amount + AuctionConfiguration.first.bid_increment_value, hide_label: true %>
+    <%= f.submit 'Bid', class: 'btn-success btn' %>
+      
 
-  <div class="field">
-    <%= f.number_field :amount, value:  @bid_amount + AuctionConfiguration.first.bid_increment_value %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit 'Bid' %>
-  </div>
 <% end %>
+      <!-- all bids -->
+      <% @auctionable.bid_events.each do |bid_event| %>
+        <div class="card card-3" style="display: block;padding: 10px;"> <span class="highlight"><%= bid_event.participant.name %></span> made a bid worth <span class="highlight"><%= bid_event.amount %> units</span> </div>
+        <% end %>
+        <%= link_to 'Close Bidding', close_bidding_auctionable_url(@auctionable.id), {disabled: !open, class:'btn btn-danger', data: { confirm: 'Are you sure?' } } %>
 <% else %>
+      <!-- all bids -->
+      <% @auctionable.bid_events.each do |bid_event| %>
+        <div class="card card-3" style="display: block;padding: 10px;"> <span class="highlight"><%= bid_event.participant.name %></span> made a bid worth <span class="highlight"><%= bid_event.amount %> units</span></div>
+        <% end %>
   <em> Bid won by <%= @auctionable.bid_events.closed.first.participant.name %> </em>
 <% end %>
-  <%= link_to 'Close Bidding', close_bidding_auctionable_url(@auctionable.id), {disabled: !open, class:'btn btn-danger'} %>
+
+
 <% end %>
   </div>
   </div>

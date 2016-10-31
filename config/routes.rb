@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :bid_events
+  resources :bid_events do
+    collection do 
+      get 'reports'
+    end
+  end
   resources :participants do
   	collection do
   		get 'bulk_new'

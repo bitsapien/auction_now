@@ -31,7 +31,7 @@ class BidEventsController < ApplicationController
         format.html { redirect_to :back }
         format.json { render :show, status: :created, location: @bid_event }
       else
-        format.html { render :new }
+        format.html { redirect_to :back }
         format.json { render json: @bid_event.errors, status: :unprocessable_entity }
       end
     end
@@ -51,6 +51,12 @@ class BidEventsController < ApplicationController
     end
   end
 
+  def reports
+    @bid_events = BidEvent.all.closed
+    csv_array = [['Auctionable Name','Participant Code','Base Price', 'Bid Amount']]
+    @bid_events.each do |bid|
+      csv_array.push([bid.auctionable.name, bid.participant.code, bid.auctionable.base_price, bid.amount])
+  end
   # DELETE /bid_events/1
   # DELETE /bid_events/1.json
   def destroy
