@@ -1,3 +1,4 @@
+require 'csv'
 class BidEventsController < ApplicationController
   before_action :set_bid_event, only: [:show, :edit, :update, :destroy]
 
@@ -53,9 +54,18 @@ class BidEventsController < ApplicationController
 
   def reports
     @bid_events = BidEvent.all.closed
-    csv_array = [['Auctionable Name','Participant Code','Base Price', 'Bid Amount']]
-    @bid_events.each do |bid|
-      csv_array.push([bid.auctionable.name, bid.participant.code, bid.auctionable.base_price, bid.amount])
+    csv_headers = ['Auctionable Name','Participant Code','Base Price', 'Bid Amount']
+
+    file = CSV.generate(headers: true) do |csv|
+      csv << csv_headers
+      @bid_events.each do |bid|
+        csv << [bid.auctionable.name, bid.participant.code, bid.auctionable.base_price, bid.amount]
+      end
+    end
+    respond_to do |format|
+      format.html
+      format.csv { send_data file, filename: "report-#{Date.today}.csv" }
+    end
   end
   # DELETE /bid_events/1
   # DELETE /bid_events/1.json
