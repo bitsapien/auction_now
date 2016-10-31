@@ -13,6 +13,7 @@ class AuctionablesController < ApplicationController
   # GET /auctionables/1
   # GET /auctionables/1.json
   def show
+    @bidding = params[:bidding]
     @bid_event = BidEvent.new
     @bid_amount = @auctionable.bid_events.blank? ?  @auctionable.base_price : @auctionable.bid_events.last.amount
     @participants = Participant.all
