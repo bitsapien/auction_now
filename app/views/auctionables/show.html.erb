@@ -1,12 +1,13 @@
 <div class="container">
   <br/>
   <% open = @auctionable.bid_events.closed.blank? %>
-  <center><h1><%= image_tag(@auctionable.image_url, {height: 70}) %></h1></center>
+  
 
   <div class="row">
     
 <% unless @bidding.eql? 'yes' %>
 <div class="col-sm-12">
+  <center><h1><%= image_tag(@auctionable.image_url, {height: 70}) %></h1></center>
 <p style="padding: 1.2em;text-align: justify;color: #555; font: 18px/1.5 'source serif pro', georgia, serif;" class="card card-2">
    <span class="highlight">Name : <%= @auctionable.name %></span>
    <span class="highlight">Current Bid : <%= @bid_amount %></span>
@@ -16,6 +17,7 @@
 </div>
 <% else %>
   <div class="col-sm-4">
+    <center><h1><%= image_tag(@auctionable.image_url, {height: 70}) %></h1></center>
     <div class="card card-1" style="padding: 12px;">
       Current Bid for <span class="highlight"><%= @auctionable.name %></span><br/>
 
