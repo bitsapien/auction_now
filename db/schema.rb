@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029095323) do
+ActiveRecord::Schema.define(version: 20161031014927) do
+
+  create_table "auction_configurations", force: :cascade do |t|
+    t.string   "application_name"
+    t.integer  "bid_increment_value"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "auctionables", force: :cascade do |t|
     t.string   "name"
@@ -30,6 +37,13 @@ ActiveRecord::Schema.define(version: 20161029095323) do
     t.datetime "updated_at",     null: false
     t.index ["auctionable_id"], name: "index_bid_events_on_auctionable_id"
     t.index ["participant_id"], name: "index_bid_events_on_participant_id"
+  end
+
+  create_table "configurations", force: :cascade do |t|
+    t.integer  "bid_incrememnt"
+    t.string   "application_name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "participants", force: :cascade do |t|

@@ -1,0 +1,1 @@
+json.array! @auction_configurations, partial: 'auction_configurations/auction_configuration', as: :auction_configuration

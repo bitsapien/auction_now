@@ -1,6 +1,6 @@
 require 'csv'
 class AuctionablesController < ApplicationController
-  before_action :set_auctionable, only: [:show, :edit, :update, :destroy]
+  before_action :set_auctionable, only: [:show, :edit, :update, :destroy, :close_bidding]
   layout 'admin'
   # GET /auctionables
   # GET /auctionables.json
@@ -41,6 +41,13 @@ class AuctionablesController < ApplicationController
      redirect_to auctionables_path
   end
 
+  def close_bidding 
+    unless @auctionable.bid_events.blank?
+      bid_event = @auctionable.bid_events.last
+      bid_event.update(final: true)
+      redirect_to auctionables_path, notice: "Bid of #{@auctionable.name} was awarded to #{bid_event.participant.name}"
+    end
+  end
   # GET /auctionables/1/edit
   def edit
   end

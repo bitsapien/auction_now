@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<!-- <h1>Auction Configurations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Application name</th>
+      <th>Bid increment value</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%# @auction_configurations.each do |auction_configuration| %>
+      <tr>
+        <td><%#= auction_configuration.application_name %></td>
+        <td><%#= auction_configuration.bid_increment_value %></td>
+        <td><%#= link_to 'Show', auction_configuration %></td>
+        <td><%#= link_to 'Edit', edit_auction_configuration_path(auction_configuration) %></td>
+        <td><%#= link_to 'Destroy', auction_configuration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <%# end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Auction Configuration', new_auction_configuration_path %> -->
+
+<h1>Editing Configuration</h1>
+
+<%= render 'form', auction_configuration: @auction_configuration %>
+
+<%= link_to 'Back', admin_path %>

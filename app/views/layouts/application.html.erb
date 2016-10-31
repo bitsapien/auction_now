@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Maverick</title>
+    <title><%= AuctionConfiguration.first.application_name %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -18,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/admin" class="navbar-brand">Maverick</a>
+      <a href="/admin" class="navbar-brand"><%= AuctionConfiguration.first.application_name %></a>
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">

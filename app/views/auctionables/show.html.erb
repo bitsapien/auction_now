@@ -1,5 +1,7 @@
 <div class="container">
+  <% open = @auctionable.bid_events.closed.blank? %>
   <h1><%= image_tag(@auctionable.image_url, {height: 70}) %> <%= @auctionable.name %></h1>
+  <%= link_to 'Close Bidding', close_bidding_auctionable_url(@auctionable.id), {disabled: !open, class:'btn btn-danger'} %>
   <div class="row">
     <div class="col-sm-6" style="background-color:yellow;">
 
@@ -16,7 +18,7 @@
         <li> <%= bid_event.participant.name %> bid <%= bid_event.amount %> </li>
         <% end %>
       <!-- form -->
-
+<% if open %>
 <%= bootstrap_form_for(@bid_event) do |f| %>
     <%= f.hidden_field :auctionable_id, value: @auctionable.id %>
     <%= f.hidden_field :final, value: false %>
@@ -25,12 +27,15 @@
   </div>
 
   <div class="field">
-    <%= f.number_field :amount, value:  @bid_amount + 5 %>
+    <%= f.number_field :amount, value:  @bid_amount + AuctionConfiguration.first.bid_increment_value %>
   </div>
 
   <div class="actions">
     <%= f.submit 'Bid' %>
   </div>
+<% end %>
+<% else %>
+  <em> Bid won by <%= @auctionable.bid_events.closed.first.participant.name %> </em>
 <% end %>
 
     </div>

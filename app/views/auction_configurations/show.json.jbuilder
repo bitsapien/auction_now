@@ -1,0 +1,1 @@
+json.partial! "auction_configurations/auction_configuration", auction_configuration: @auction_configuration

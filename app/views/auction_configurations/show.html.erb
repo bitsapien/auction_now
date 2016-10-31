@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Application name:</strong>
+  <%= @auction_configuration.application_name %>
+</p>
+
+<p>
+  <strong>Bid increment value:</strong>
+  <%= @auction_configuration.bid_increment_value %>
+</p>
+
+<%= link_to 'Edit', edit_auction_configuration_path(@auction_configuration) %> |
+<%= link_to 'Back', auction_configurations_path %>

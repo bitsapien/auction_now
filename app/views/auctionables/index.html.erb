@@ -17,7 +17,12 @@
   <tbody>
     <% @auctionables.each do |auctionable| %>
       <tr>
+        <%#= auctionable.bid_events.closed.inspect %>
+        <% if auctionable.bid_events.closed.blank? %>
         <td> <%= link_to 'Play', auctionable, {class: 'btn btn-block btn-success'} %> </td>
+        <% else %>
+        <td> <%= link_to 'View', auctionable, {class: 'btn btn-block btn-info'} %> </td>
+        <% end %>
         <td><%= auctionable.name %></td>
         <td><%= auctionable.description[0..30].gsub(/\s\w+\s*$/, '...') %></td>
         <td><%= image_tag(auctionable.image_url, {height: 32}) %></td>

@@ -1,4 +1,4 @@
-<%= form_for(participant) do |f| %>
+<%= bootstrap_form_for(participant) do |f| %>
   <% if participant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(participant.errors.count, "error") %> prohibited this participant from being saved:</h2>
@@ -12,17 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :organization %>
     <%= f.text_field :organization %>
   </div>
 
   <div class="field">
-    <%= f.label :code %>
     <%= f.text_field :code %>
   </div>
 
