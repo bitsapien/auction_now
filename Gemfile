@@ -55,5 +55,4 @@ gem 'bootstrap_form'
 
 group :production do
   gem 'unicorn'
-  gem 'pg'
 end
