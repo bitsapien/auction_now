@@ -43,6 +43,7 @@
       <% @auctionable.bid_events.each do |bid_event| %>
         <div class="card card-3" style="display: block;padding: 10px;"> <span class="highlight"><%= bid_event.participant.name %></span> made a bid worth <span class="highlight"><%= bid_event.amount %> units</span> </div>
         <% end %>
+        <br/><br/>
         <%= link_to 'Close Bidding', close_bidding_auctionable_url(@auctionable.id), {disabled: !open, class:'btn btn-danger', data: { confirm: 'Are you sure?' } } %>
 <% else %>
       <!-- all bids -->
