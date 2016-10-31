@@ -1,3 +1,3 @@
 class Auctionable < ApplicationRecord
-	has_many :bid_events
+	has_many :bid_events, dependent: :destroy
 end
