@@ -72,7 +72,7 @@ class BidEventsController < ApplicationController
   def destroy
     @bid_event.destroy
     respond_to do |format|
-      format.html { redirect_to bid_events_url, notice: 'Bid event was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Bid event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

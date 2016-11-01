@@ -39,16 +39,23 @@
       
 
 <% end %>
+      <% num_of_bid_events = @auctionable.bid_events.size %>
       <!-- all bids -->
-      <% @auctionable.bid_events.each do |bid_event| %>
-        <div class="card card-3" style="display: block;padding: 10px;"> <span class="highlight"><%= bid_event.participant.name %></span> made a bid worth <span class="highlight"><%= bid_event.amount %> units</span> </div>
+      <% @auctionable.bid_events.each_with_index do |bid_event, index| %>
+        <div class="card card-3" style="display: block;padding: 10px;"> 
+          <span class="highlight"><%= bid_event.participant.name %>
+          </span> made a bid worth <span class="highlight"><%= bid_event.amount %> units</span> 
+          <span class="pull-right"><%= link_to 'undo', bid_event, method: :delete, data: { confirm: 'Are you sure?' } if index.eql?(num_of_bid_events-1) %>
+          </span>
+        </div>
         <% end %>
         <br/><br/>
         <%= link_to 'Close Bidding', close_bidding_auctionable_url(@auctionable.id), {disabled: !open, class:'btn btn-danger', data: { confirm: 'Are you sure?' } } %>
 <% else %>
       <!-- all bids -->
+      
       <% @auctionable.bid_events.each do |bid_event| %>
-        <div class="card card-3" style="display: block;padding: 10px;"> <span class="highlight"><%= bid_event.participant.name %></span> made a bid worth <span class="highlight"><%= bid_event.amount %> units</span></div>
+        <div class="card card-3" style="display: block;padding: 10px;"> <span class="highlight"><%= bid_event.participant.name %></span> made a bid worth <span class="highlight"><%= bid_event.amount %> units</span> </span></div>
         <% end %>
   <em> Bid won by <%= @auctionable.bid_events.closed.first.participant.name %> </em>
 <% end %>
